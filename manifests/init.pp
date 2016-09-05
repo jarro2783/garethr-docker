@@ -367,6 +367,7 @@ class docker(
   $shell_values                      = undef,
   $proxy                             = $docker::params::proxy,
   $no_proxy                          = $docker::params::no_proxy,
+  $registry_mirror                   = $docker::params::registry_mirror,
   $storage_driver                    = $docker::params::storage_driver,
   $dm_basesize                       = $docker::params::dm_basesize,
   $dm_fs                             = $docker::params::dm_fs,
