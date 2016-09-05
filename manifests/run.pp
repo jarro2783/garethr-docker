@@ -50,6 +50,7 @@
 #
 define docker::run(
   $image,
+  $image_tag = undef,
   $ensure = 'present',
   $command = undef,
   $memory_limit = '0b',
@@ -208,9 +209,13 @@ define docker::run(
     $sanitised_after_array = regsubst($after_array, '[^0-9A-Za-z.\-]', '-', 'G')
   }
 
-  require docker::image[$image]
+  Docker::Image[$image] -> Docker::Run[$name]
 
-  $real_image = docker::image[$image][$image_arg]
+  if $image_tag {
+      $real_image = "${image}:${image_tag}"
+  } else {
+      $real_image = $image
+  }
 
   if $restart {
 
