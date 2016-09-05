@@ -83,17 +83,17 @@ start() {
         $docker create \
         <%= @docker_run_flags %> \
         --name <%= @sanitised_title %> \
-        <%= @image %> \
+        <%= @image_arg %> \
         <% if @command %> <%= @command %><% end %>
     <% end -%>
     <% if @pull_on_start -%>
-        $docker pull <%= @image %>
+        $docker pull <%= @image_arg %>
     <% end -%>
     <% if @remove_container_on_stop -%>
     $docker run \
     <%= @docker_run_flags %> \
     --name <%= @sanitised_title %> \
-    <%= @image %> \
+    <%= @image_arg %> \
     <% if @command %> <%= @command %><% end %>
     <% else %>
     $docker start -a <%= @sanitised_title %>

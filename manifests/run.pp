@@ -208,6 +208,10 @@ define docker::run(
     $sanitised_after_array = regsubst($after_array, '[^0-9A-Za-z.\-]', '-', 'G')
   }
 
+  require docker::image[$image]
+
+  $real_image = docker::image[$image][$image_arg]
+
   if $restart {
 
     $cidfile = "/var/run/${service_prefix}${sanitised_title}.cid"
@@ -215,7 +219,7 @@ define docker::run(
     $run_with_docker_command = [
       "${docker_command} run -d ${docker_run_flags}",
       "--name ${sanitised_title} --cidfile=${cidfile}",
-      "--restart=\"${restart}\" ${image} ${command}",
+      "--restart=\"${restart}\" ${real_image} ${command}",
     ]
     exec { "run ${title} with docker":
       command     => join($run_with_docker_command, ' '),
