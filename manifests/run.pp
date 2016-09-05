@@ -224,7 +224,7 @@ define docker::run(
     $run_with_docker_command = [
       "${docker_command} run -d ${docker_run_flags}",
       "--name ${sanitised_title} --cidfile=${cidfile}",
-      "--restart=\"${restart}\" ${real_image} ${command}",
+      "--restart=\"${restart}\" ${image} ${command}",
     ]
     exec { "run ${title} with docker":
       command     => join($run_with_docker_command, ' '),
