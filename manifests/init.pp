@@ -500,7 +500,5 @@ class docker(
   contain 'docker::config'
   contain 'docker::service'
 
-  Class['docker'] -> Docker::Registry <||> -> Docker::Image <||> -> Docker::Run <||>
-  Class['docker'] -> Docker::Image <||> -> Docker::Run <||>
-  Class['docker'] -> Docker::Run <||>
+  Class['docker'] -> Docker::Registry <||> -> Docker::Image <||>
 }
