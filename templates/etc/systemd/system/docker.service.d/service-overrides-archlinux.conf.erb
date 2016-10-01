@@ -1,2 +1,4 @@
 [Service]
 EnvironmentFile=-/etc/conf.d/docker
+ExecStart=
+ExecStart=/usr/bin/docker daemon $other_args
